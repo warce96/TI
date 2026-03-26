@@ -10,7 +10,6 @@
 :root{
 --primary:#0b3c5d;
 --secondary:#1f7a8c;
---accent:#2f67f6;
 --bg:#f4f6fb;
 --card:#ffffff;
 --text:#1d2433;
@@ -34,41 +33,40 @@ padding:20px;
 max-width:1100px;
 margin:auto;
 background:white;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
+border-radius:12px;
+box-shadow:0 8px 24px rgba(0,0,0,0.08);
 overflow:hidden;
 }
 
 /* HEADER */
 
 .header{
-background:linear-gradient(135deg,var(--primary),var(--secondary));
+background:var(--primary);
 color:white;
-padding:35px;
-text-align:center;
+padding:32px;
 }
 
 .header h1{
-font-size:28px;
-margin-bottom:8px;
+font-size:26px;
+margin-bottom:6px;
 }
 
 .header p{
-font-size:14px;
+font-size:13px;
 opacity:.9;
 }
 
 /* SECTION */
 
 .section{
-padding:26px 32px;
-border-bottom:1px solid #eee;
+padding:28px 34px;
+border-bottom:1px solid #e5e7eb;
 }
 
 .section h2{
 margin-bottom:12px;
 color:var(--primary);
-font-size:20px;
+font-size:18px;
 }
 
 .section p{
@@ -77,26 +75,21 @@ color:#444;
 line-height:1.6;
 }
 
-/* KPI CARDS */
+/* KPI */
 
 .kpi-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:14px;
+gap:12px;
 margin-top:14px;
 }
 
 .kpi{
-background:white;
-border-radius:10px;
-padding:16px;
+background:#f9fafb;
+border:1px solid #e5e7eb;
+border-radius:8px;
+padding:14px;
 text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.05);
-transition:.3s;
-}
-
-.kpi:hover{
-transform:translateY(-4px);
 }
 
 .kpi-title{
@@ -105,42 +98,15 @@ color:var(--muted);
 }
 
 .kpi-value{
-font-size:20px;
+font-size:18px;
 font-weight:700;
-color:var(--primary);
 margin-top:4px;
-}
-
-/* DASHBOARD CARDS */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:16px;
-margin-top:16px;
-}
-
-.card{
-background:white;
-border-radius:12px;
-padding:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-6px);
-}
-
-.card h3{
-color:var(--primary);
-margin-bottom:10px;
 }
 
 /* LIST */
 
 ul{
-margin-top:8px;
+margin-top:10px;
 padding-left:18px;
 }
 
@@ -149,11 +115,29 @@ margin-bottom:6px;
 font-size:14px;
 }
 
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:14px;
+}
+
+table th, table td{
+padding:10px;
+border:1px solid #e5e7eb;
+font-size:14px;
+}
+
+table th{
+background:#f2f4f7;
+text-align:left;
+}
+
 /* FOOTER */
 
 .footer{
 padding:20px;
-text-align:center;
 font-size:13px;
 color:var(--muted);
 }
@@ -161,8 +145,8 @@ color:var(--muted);
 /* RESPONSIVE */
 
 @media(max-width:900px){
-.grid, .kpi-grid{
-grid-template-columns:1fr;
+.kpi-grid{
+grid-template-columns:1fr 1fr;
 }
 }
 
@@ -177,67 +161,47 @@ grid-template-columns:1fr;
 
 <div class="header">
 <h1>Propuesta de Implementación BI & SAP</h1>
-<p>Empresa: Molinos El País | Carmen del Paraná</p>
+<p>Empresa: Molinos El País – Carmen del Paraná</p>
 <p>Consultor: Willian Arce | 0987320151</p>
 </div>
 
 <!-- CONTEXTO -->
 
 <div class="section">
-<h2>Contexto del Proyecto</h2>
+<h2>1. Contexto</h2>
 <p>
-La empresa Molinos El País, dedicada a la comercialización y exportación de arroz,
-requiere fortalecer su análisis financiero y operativo mediante herramientas de Business Intelligence.
-</p>
-
-<p>
-Actualmente se cuenta con acceso a la base de datos SAP, lo que permite desarrollar dashboards en Power BI
-orientados a la toma de decisiones estratégicas del equipo administrativo.
+La empresa Molinos El País cuenta con un sistema SAP recientemente implementado, con información disponible a nivel de base de datos.
+El equipo administrativo requiere mejorar la visualización y análisis de información mediante herramientas de Business Intelligence.
 </p>
 </div>
 
 <!-- OBJETIVO -->
 
 <div class="section">
-<h2>Objetivo</h2>
+<h2>2. Objetivo del Proyecto</h2>
 <p>
-Desarrollar dashboards ejecutivos que permitan visualizar en tiempo real el estado financiero,
-comercial y de cobranza de la empresa, facilitando el control del negocio y la toma de decisiones.
+Implementar dashboards ejecutivos en Power BI que permitan monitorear en tiempo real la situación financiera, comercial y de cobranza,
+facilitando la toma de decisiones estratégicas a nivel gerencial.
 </p>
 </div>
 
-<!-- DEUDA BANCARIA -->
+<!-- DEUDA -->
 
 <div class="section">
-<h2>📊 Dashboard Deuda Bancaria (Nivel CFO)</h2>
+<h2>3. Dashboard Deuda Bancaria</h2>
 
 <div class="kpi-grid">
-<div class="kpi">
-<div class="kpi-title">Deuda Total</div>
-<div class="kpi-value">Gs / USD</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Deuda Neta</div>
-<div class="kpi-value">Deuda - Caja</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Costo Promedio</div>
-<div class="kpi-value">%</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">DSCR</div>
-<div class="kpi-value">Capacidad pago</div>
-</div>
+<div class="kpi"><div class="kpi-title">Deuda Total</div><div class="kpi-value">Monto total</div></div>
+<div class="kpi"><div class="kpi-title">Deuda Neta</div><div class="kpi-value">Deuda - Caja</div></div>
+<div class="kpi"><div class="kpi-title">Costo Financiero</div><div class="kpi-value">%</div></div>
+<div class="kpi"><div class="kpi-title">DSCR</div><div class="kpi-value">Capacidad de pago</div></div>
 </div>
 
 <ul>
-<li>Control total de deuda financiera (corto y largo plazo)</li>
-<li>Análisis de tasa de interés promedio</li>
-<li>Evaluación de capacidad de pago</li>
-<li>Indicadores de riesgo financiero</li>
+<li>Control de deuda financiera consolidada</li>
+<li>Análisis de tasas de interés</li>
+<li>Evaluación de riesgo financiero</li>
+<li>Capacidad de cobertura de deuda</li>
 </ul>
 
 </div>
@@ -245,35 +209,20 @@ comercial y de cobranza de la empresa, facilitando el control del negocio y la t
 <!-- VENTAS -->
 
 <div class="section">
-<h2>📊 Dashboard Ventas (Arroz)</h2>
+<h2>4. Dashboard de Ventas</h2>
 
 <div class="kpi-grid">
-<div class="kpi">
-<div class="kpi-title">Ventas Totales</div>
-<div class="kpi-value">Gs / USD</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Volumen</div>
-<div class="kpi-value">Toneladas</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Ticket Promedio</div>
-<div class="kpi-value">Cliente</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Variación</div>
-<div class="kpi-value">Mes / Año</div>
-</div>
+<div class="kpi"><div class="kpi-title">Ventas Totales</div><div class="kpi-value">Periodo</div></div>
+<div class="kpi"><div class="kpi-title">Volumen</div><div class="kpi-value">Toneladas</div></div>
+<div class="kpi"><div class="kpi-title">Ticket Promedio</div><div class="kpi-value">Cliente</div></div>
+<div class="kpi"><div class="kpi-title">Variación</div><div class="kpi-value">Comparativo</div></div>
 </div>
 
 <ul>
-<li>Ventas por cliente, producto y región</li>
-<li>Análisis de volumen vs precio</li>
-<li>Comparativo histórico</li>
+<li>Análisis de ventas por cliente y producto</li>
+<li>Comparativo mensual y anual</li>
 <li>Seguimiento de exportaciones</li>
+<li>Análisis de volumen vs precio</li>
 </ul>
 
 </div>
@@ -281,63 +230,100 @@ comercial y de cobranza de la empresa, facilitando el control del negocio y la t
 <!-- COBRANZA -->
 
 <div class="section">
-<h2>📊 Dashboard Cobranza</h2>
+<h2>5. Dashboard de Cobranza</h2>
 
 <div class="kpi-grid">
-<div class="kpi">
-<div class="kpi-title">Cartera Vencida</div>
-<div class="kpi-value">Gs</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">DSO</div>
-<div class="kpi-value">Días</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Recuperación</div>
-<div class="kpi-value">%</div>
-</div>
-
-<div class="kpi">
-<div class="kpi-title">Liquidez</div>
-<div class="kpi-value">Estado</div>
-</div>
+<div class="kpi"><div class="kpi-title">Cartera Vencida</div><div class="kpi-value">Monto</div></div>
+<div class="kpi"><div class="kpi-title">DSO</div><div class="kpi-value">Días</div></div>
+<div class="kpi"><div class="kpi-title">Recuperación</div><div class="kpi-value">%</div></div>
+<div class="kpi"><div class="kpi-title">Liquidez</div><div class="kpi-value">Estado</div></div>
 </div>
 
 <ul>
 <li>Control de cuentas por cobrar</li>
 <li>Seguimiento de mora</li>
-<li>Recuperación de cartera</li>
+<li>Indicadores de recuperación</li>
 <li>Análisis de liquidez</li>
 </ul>
 
 </div>
 
-<!-- TECNOLOGIA -->
+<!-- ALCANCE -->
 
 <div class="section">
-<h2>Tecnologías</h2>
+<h2>6. Alcance del Servicio</h2>
 
 <ul>
-<li>SAP (Base de datos)</li>
-<li>Power BI (Dashboards)</li>
-<li>SQL avanzado</li>
-<li>Acceso remoto seguro</li>
+<li>Conexión a base de datos SAP</li>
+<li>Modelado de datos</li>
+<li>Desarrollo de dashboards en Power BI</li>
+<li>Optimización de consultas SQL</li>
+<li>Implementación de indicadores KPI</li>
+<li>Soporte remoto</li>
 </ul>
 
 </div>
 
-<!-- VALOR -->
+<!-- PRESUPUESTO -->
 
 <div class="section">
-<h2>Valor Estratégico</h2>
+<h2>7. Propuesta Económica</h2>
+
+<table>
+<tr>
+<th>Fase</th>
+<th>Descripción</th>
+<th>Inversión</th>
+</tr>
+
+<tr>
+<td>Fase 1</td>
+<td>Conexión a SAP + modelado de datos</td>
+<td>Gs. 2.500.000</td>
+</tr>
+
+<tr>
+<td>Fase 2</td>
+<td>Desarrollo Dashboard Deuda Bancaria</td>
+<td>Gs. 2.000.000</td>
+</tr>
+
+<tr>
+<td>Fase 3</td>
+<td>Desarrollo Dashboard Ventas</td>
+<td>Gs. 2.000.000</td>
+</tr>
+
+<tr>
+<td>Fase 4</td>
+<td>Desarrollo Dashboard Cobranza</td>
+<td>Gs. 2.000.000</td>
+</tr>
+
+<tr>
+<td><strong>Total Proyecto</strong></td>
+<td></td>
+<td><strong>Gs. 8.500.000</strong></td>
+</tr>
+
+</table>
+
+<p style="margin-top:10px;">
+Incluye desarrollo, pruebas y entrega de dashboards funcionales.
+</p>
+
+</div>
+
+<!-- CONDICIONES -->
+
+<div class="section">
+<h2>8. Condiciones</h2>
 
 <ul>
-<li>Visión ejecutiva en tiempo real</li>
-<li>Mejor control financiero</li>
-<li>Optimización de decisiones</li>
-<li>Reducción de riesgo operativo</li>
+<li>Proyecto de uso interno</li>
+<li>No incluye pasarelas de pago</li>
+<li>Acceso a base de datos provisto por el cliente</li>
+<li>Modalidad remota</li>
 </ul>
 
 </div>
@@ -345,7 +331,7 @@ comercial y de cobranza de la empresa, facilitando el control del negocio y la t
 <!-- FOOTER -->
 
 <div class="footer">
-<p>Proyecto de uso interno – No incluye pasarela de pagos</p>
+<p>Propuesta técnica – Uso exclusivo del cliente</p>
 <p>Desarrollado por Willian Arce</p>
 </div>
 
