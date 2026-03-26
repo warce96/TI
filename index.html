@@ -10,23 +10,24 @@
 :root{
 --primary:#0b3c5d;
 --secondary:#1f7a8c;
---accent:#2f67f6;
 --bg:#f4f6fb;
 --card:#ffffff;
 --text:#1d2433;
 --muted:#667085;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-font-family:"Segoe UI", Arial, sans-serif;
-background:var(--bg);
-color:var(--text);
-padding:20px;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-/* CONTAINER */
+body{
+font-family:"Segoe UI", Arial;
+background:var(--bg);
+padding:20px;
+color:var(--text);
+}
 
 .container{
 max-width:1100px;
@@ -40,14 +41,13 @@ overflow:hidden;
 /* HEADER */
 
 .header{
-background:linear-gradient(135deg,var(--primary),var(--secondary));
+background:var(--primary);
 color:white;
-padding:36px;
+padding:30px;
 }
 
 .header h1{
-font-size:28px;
-margin-bottom:6px;
+font-size:26px;
 }
 
 .header p{
@@ -63,26 +63,32 @@ border-bottom:1px solid #e5e7eb;
 }
 
 .section h2{
-margin-bottom:12px;
 color:var(--primary);
+margin-bottom:10px;
+font-size:18px;
 }
 
-/* KPI ANIMADOS */
+.section p{
+font-size:14px;
+line-height:1.6;
+color:#444;
+}
+
+/* KPI */
 
 .kpi-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:14px;
-margin-top:14px;
+gap:12px;
+margin-top:12px;
 }
 
 .kpi{
 background:#f9fafb;
-border-radius:10px;
-padding:16px;
-text-align:center;
 border:1px solid #e5e7eb;
-animation:fadeUp .8s ease;
+padding:14px;
+border-radius:8px;
+text-align:center;
 }
 
 .kpi-title{
@@ -91,33 +97,9 @@ color:var(--muted);
 }
 
 .kpi-value{
-font-size:22px;
+font-size:18px;
 font-weight:700;
-margin-top:6px;
-color:var(--primary);
-}
-
-/* DASHBOARD MOCK */
-
-.dashboard{
-margin-top:18px;
-background:#0b1220;
-border-radius:12px;
-padding:20px;
-color:white;
-}
-
-.dashboard-title{
-margin-bottom:14px;
-font-weight:700;
-}
-
-.chart{
-height:120px;
-background:linear-gradient(90deg,#2f67f6,#6ea8ff);
-border-radius:6px;
-margin-top:10px;
-animation:grow 2s ease;
+margin-top:5px;
 }
 
 /* TABLE */
@@ -125,7 +107,7 @@ animation:grow 2s ease;
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:14px;
+margin-top:12px;
 }
 
 table th, table td{
@@ -138,6 +120,18 @@ table th{
 background:#f2f4f7;
 }
 
+/* LIST */
+
+ul{
+padding-left:18px;
+margin-top:10px;
+}
+
+ul li{
+margin-bottom:6px;
+font-size:14px;
+}
+
 /* CTA */
 
 .cta{
@@ -146,40 +140,38 @@ padding:30px;
 }
 
 .cta button{
-background:var(--accent);
+background:#2f67f6;
 color:white;
 border:none;
 padding:14px 24px;
 border-radius:8px;
-font-size:16px;
 cursor:pointer;
-transition:.3s;
+font-size:15px;
 }
 
 .cta button:hover{
 background:#1d4ed8;
-transform:scale(1.05);
 }
 
-/* ANIMACIONES */
+/* FOOTER */
 
-@keyframes fadeUp{
-from{opacity:0; transform:translateY(10px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes grow{
-from{width:0;}
-to{width:100%;}
+.footer{
+padding:20px;
+font-size:13px;
+color:var(--muted);
+text-align:center;
 }
 
 /* RESPONSIVE */
 
 @media(max-width:900px){
-.kpi-grid{grid-template-columns:1fr 1fr;}
+.kpi-grid{
+grid-template-columns:1fr 1fr;
+}
 }
 
 </style>
+
 </head>
 
 <body>
@@ -189,25 +181,35 @@ to{width:100%;}
 <!-- HEADER -->
 
 <div class="header">
-<h1>Propuesta BI & SAP</h1>
-<p>Molinos El País – Carmen del Paraná</p>
+<h1>Propuesta de Implementación BI & SAP</h1>
+<p>Empresa: Molinos El País – Carmen del Paraná</p>
 <p>Consultor: Willian Arce | 0987320151</p>
 </div>
 
-<!-- IMPACTO -->
+<!-- CONTEXTO -->
 
 <div class="section">
-<h2>Visión Ejecutiva</h2>
+<h2>1. Contexto</h2>
 <p>
-Esta solución permitirá transformar los datos actuales de SAP en información estratégica en tiempo real,
-brindando visibilidad total sobre deuda, ventas y cobranza.
+La empresa cuenta con un sistema SAP recientemente implementado, con disponibilidad de datos a nivel de base.
+Se requiere fortalecer la visualización de información mediante dashboards ejecutivos en Power BI.
+</p>
+</div>
+
+<!-- OBJETIVO -->
+
+<div class="section">
+<h2>2. Objetivo</h2>
+<p>
+Desarrollar dashboards que permitan visualizar en tiempo real la situación financiera, comercial y de cobranza,
+facilitando la toma de decisiones estratégicas.
 </p>
 </div>
 
 <!-- DEUDA -->
 
 <div class="section">
-<h2>Dashboard Financiero – Deuda Bancaria</h2>
+<h2>3. Dashboard Deuda Bancaria</h2>
 
 <div class="kpi-grid">
 <div class="kpi"><div class="kpi-title">Deuda Total</div><div class="kpi-value">Gs</div></div>
@@ -216,74 +218,141 @@ brindando visibilidad total sobre deuda, ventas y cobranza.
 <div class="kpi"><div class="kpi-title">DSCR</div><div class="kpi-value">Ratio</div></div>
 </div>
 
-<div class="dashboard">
-<div class="dashboard-title">Vista simulada Power BI</div>
-<div class="chart"></div>
-</div>
+<ul>
+<li>Control de deuda financiera total</li>
+<li>Análisis de tasa de interés</li>
+<li>Capacidad de pago</li>
+<li>Evaluación de riesgo financiero</li>
+</ul>
 
 </div>
 
 <!-- VENTAS -->
 
 <div class="section">
-<h2>Dashboard Comercial – Ventas</h2>
+<h2>4. Dashboard Ventas</h2>
 
 <div class="kpi-grid">
-<div class="kpi"><div class="kpi-title">Ventas</div><div class="kpi-value">Gs</div></div>
+<div class="kpi"><div class="kpi-title">Ventas Totales</div><div class="kpi-value">Gs</div></div>
 <div class="kpi"><div class="kpi-title">Volumen</div><div class="kpi-value">Ton</div></div>
-<div class="kpi"><div class="kpi-title">Ticket</div><div class="kpi-value">Gs</div></div>
+<div class="kpi"><div class="kpi-title">Ticket Promedio</div><div class="kpi-value">Gs</div></div>
 <div class="kpi"><div class="kpi-title">Variación</div><div class="kpi-value">%</div></div>
 </div>
 
-<div class="dashboard">
-<div class="dashboard-title">Análisis de ventas</div>
-<div class="chart"></div>
-</div>
+<ul>
+<li>Ventas por cliente y producto</li>
+<li>Análisis histórico</li>
+<li>Comparativo mensual y anual</li>
+<li>Seguimiento de exportaciones</li>
+</ul>
 
 </div>
 
 <!-- COBRANZA -->
 
 <div class="section">
-<h2>Dashboard de Cobranza</h2>
+<h2>5. Dashboard Cobranza</h2>
 
 <div class="kpi-grid">
-<div class="kpi"><div class="kpi-title">Cartera</div><div class="kpi-value">Gs</div></div>
+<div class="kpi"><div class="kpi-title">Cartera Vencida</div><div class="kpi-value">Gs</div></div>
 <div class="kpi"><div class="kpi-title">DSO</div><div class="kpi-value">Días</div></div>
 <div class="kpi"><div class="kpi-title">Recuperación</div><div class="kpi-value">%</div></div>
 <div class="kpi"><div class="kpi-title">Liquidez</div><div class="kpi-value">Estado</div></div>
 </div>
 
-<div class="dashboard">
-<div class="dashboard-title">Estado de cobranza</div>
-<div class="chart"></div>
+<ul>
+<li>Control de cuentas por cobrar</li>
+<li>Seguimiento de mora</li>
+<li>Indicadores de recuperación</li>
+<li>Análisis de liquidez</li>
+</ul>
+
 </div>
+
+<!-- ALCANCE -->
+
+<div class="section">
+<h2>6. Alcance</h2>
+
+<ul>
+<li>Conexión a base SAP</li>
+<li>Modelado de datos</li>
+<li>Desarrollo dashboards Power BI</li>
+<li>Consultas SQL optimizadas</li>
+<li>Validación con usuarios</li>
+</ul>
+
+</div>
+
+<!-- ENTREGABLES -->
+
+<div class="section">
+<h2>7. Entregables</h2>
+
+<ul>
+<li>Dashboard Deuda</li>
+<li>Dashboard Ventas</li>
+<li>Dashboard Cobranza</li>
+<li>Modelo de datos</li>
+<li>Documentación básica</li>
+</ul>
+
+</div>
+
+<!-- FASES -->
+
+<div class="section">
+<h2>8. Fases</h2>
+
+<table>
+<tr><th>Fase</th><th>Descripción</th><th>Duración</th></tr>
+<tr><td>1</td><td>Conexión SAP</td><td>3-5 días</td></tr>
+<tr><td>2</td><td>Modelado</td><td>5-7 días</td></tr>
+<tr><td>3</td><td>Dashboards</td><td>10-12 días</td></tr>
+<tr><td>4</td><td>Validación</td><td>3 días</td></tr>
+</table>
 
 </div>
 
 <!-- PRESUPUESTO -->
 
 <div class="section">
-<h2>Inversión</h2>
+<h2>9. Inversión</h2>
 
 <table>
-<tr><th>Fase</th><th>Descripción</th><th>Monto</th></tr>
-<tr><td>1</td><td>Modelado SAP + conexión</td><td>Gs. 2.500.000</td></tr>
-<tr><td>2</td><td>Dashboard Deuda</td><td>Gs. 2.000.000</td></tr>
-<tr><td>3</td><td>Dashboard Ventas</td><td>Gs. 2.000.000</td></tr>
-<tr><td>4</td><td>Dashboard Cobranza</td><td>Gs. 2.000.000</td></tr>
-<tr><td><strong>Total</strong></td><td></td><td><strong>Gs. 8.500.000</strong></td></tr>
+<tr><th>Concepto</th><th>Monto</th></tr>
+<tr><td>Implementación completa BI</td><td>Gs. 8.500.000</td></tr>
 </table>
+
+</div>
+
+<!-- LIMITACIONES -->
+
+<div class="section">
+<h2>10. Condiciones</h2>
+
+<ul>
+<li>Uso interno</li>
+<li>No incluye cambios en SAP</li>
+<li>No incluye licencias Power BI</li>
+<li>Acceso a datos proporcionado por cliente</li>
+</ul>
 
 </div>
 
 <!-- CTA -->
 
 <div class="cta">
-<p style="margin-bottom:12px;">Si estás de acuerdo, podemos iniciar inmediatamente el proyecto.</p>
+<p>En caso de aprobación, se puede iniciar el proyecto de forma inmediata.</p>
 <button onclick="window.location.href='https://wa.me/595987320151'">
-Confirmar Inicio del Proyecto
+Confirmar inicio
 </button>
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+Propuesta técnica – Willian Arce
 </div>
 
 </div>
