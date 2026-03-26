@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Propuesta BI & SAP – Molinos El País</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+:root{
+--primary:#0b3c5d;
+--secondary:#1f7a8c;
+--accent:#2f67f6;
+--bg:#f4f6fb;
+--card:#ffffff;
+--text:#1d2433;
+--muted:#667085;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:"Segoe UI", Arial, sans-serif;
+background:var(--bg);
+color:var(--text);
+padding:20px;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+background:white;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+overflow:hidden;
+}
+
+/* HEADER */
+
+.header{
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+color:white;
+padding:35px;
+text-align:center;
+}
+
+.header h1{
+font-size:28px;
+margin-bottom:8px;
+}
+
+.header p{
+font-size:14px;
+opacity:.9;
+}
+
+/* SECTION */
+
+.section{
+padding:26px 32px;
+border-bottom:1px solid #eee;
+}
+
+.section h2{
+margin-bottom:12px;
+color:var(--primary);
+font-size:20px;
+}
+
+.section p{
+font-size:14px;
+color:#444;
+line-height:1.6;
+}
+
+/* KPI CARDS */
+
+.kpi-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-top:14px;
+}
+
+.kpi{
+background:white;
+border-radius:10px;
+padding:16px;
+text-align:center;
+box-shadow:0 6px 18px rgba(0,0,0,0.05);
+transition:.3s;
+}
+
+.kpi:hover{
+transform:translateY(-4px);
+}
+
+.kpi-title{
+font-size:12px;
+color:var(--muted);
+}
+
+.kpi-value{
+font-size:20px;
+font-weight:700;
+color:var(--primary);
+margin-top:4px;
+}
+
+/* DASHBOARD CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
+margin-top:16px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+padding:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card h3{
+color:var(--primary);
+margin-bottom:10px;
+}
+
+/* LIST */
+
+ul{
+margin-top:8px;
+padding-left:18px;
+}
+
+ul li{
+margin-bottom:6px;
+font-size:14px;
+}
+
+/* FOOTER */
+
+.footer{
+padding:20px;
+text-align:center;
+font-size:13px;
+color:var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+.grid, .kpi-grid{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+<h1>Propuesta de Implementación BI & SAP</h1>
+<p>Empresa: Molinos El País | Carmen del Paraná</p>
+<p>Consultor: Willian Arce | 0987320151</p>
+</div>
+
+<!-- CONTEXTO -->
+
+<div class="section">
+<h2>Contexto del Proyecto</h2>
+<p>
+La empresa Molinos El País, dedicada a la comercialización y exportación de arroz,
+requiere fortalecer su análisis financiero y operativo mediante herramientas de Business Intelligence.
+</p>
+
+<p>
+Actualmente se cuenta con acceso a la base de datos SAP, lo que permite desarrollar dashboards en Power BI
+orientados a la toma de decisiones estratégicas del equipo administrativo.
+</p>
+</div>
+
+<!-- OBJETIVO -->
+
+<div class="section">
+<h2>Objetivo</h2>
+<p>
+Desarrollar dashboards ejecutivos que permitan visualizar en tiempo real el estado financiero,
+comercial y de cobranza de la empresa, facilitando el control del negocio y la toma de decisiones.
+</p>
+</div>
+
+<!-- DEUDA BANCARIA -->
+
+<div class="section">
+<h2>📊 Dashboard Deuda Bancaria (Nivel CFO)</h2>
+
+<div class="kpi-grid">
+<div class="kpi">
+<div class="kpi-title">Deuda Total</div>
+<div class="kpi-value">Gs / USD</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Deuda Neta</div>
+<div class="kpi-value">Deuda - Caja</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Costo Promedio</div>
+<div class="kpi-value">%</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">DSCR</div>
+<div class="kpi-value">Capacidad pago</div>
+</div>
+</div>
+
+<ul>
+<li>Control total de deuda financiera (corto y largo plazo)</li>
+<li>Análisis de tasa de interés promedio</li>
+<li>Evaluación de capacidad de pago</li>
+<li>Indicadores de riesgo financiero</li>
+</ul>
+
+</div>
+
+<!-- VENTAS -->
+
+<div class="section">
+<h2>📊 Dashboard Ventas (Arroz)</h2>
+
+<div class="kpi-grid">
+<div class="kpi">
+<div class="kpi-title">Ventas Totales</div>
+<div class="kpi-value">Gs / USD</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Volumen</div>
+<div class="kpi-value">Toneladas</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Ticket Promedio</div>
+<div class="kpi-value">Cliente</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Variación</div>
+<div class="kpi-value">Mes / Año</div>
+</div>
+</div>
+
+<ul>
+<li>Ventas por cliente, producto y región</li>
+<li>Análisis de volumen vs precio</li>
+<li>Comparativo histórico</li>
+<li>Seguimiento de exportaciones</li>
+</ul>
+
+</div>
+
+<!-- COBRANZA -->
+
+<div class="section">
+<h2>📊 Dashboard Cobranza</h2>
+
+<div class="kpi-grid">
+<div class="kpi">
+<div class="kpi-title">Cartera Vencida</div>
+<div class="kpi-value">Gs</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">DSO</div>
+<div class="kpi-value">Días</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Recuperación</div>
+<div class="kpi-value">%</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">Liquidez</div>
+<div class="kpi-value">Estado</div>
+</div>
+</div>
+
+<ul>
+<li>Control de cuentas por cobrar</li>
+<li>Seguimiento de mora</li>
+<li>Recuperación de cartera</li>
+<li>Análisis de liquidez</li>
+</ul>
+
+</div>
+
+<!-- TECNOLOGIA -->
+
+<div class="section">
+<h2>Tecnologías</h2>
+
+<ul>
+<li>SAP (Base de datos)</li>
+<li>Power BI (Dashboards)</li>
+<li>SQL avanzado</li>
+<li>Acceso remoto seguro</li>
+</ul>
+
+</div>
+
+<!-- VALOR -->
+
+<div class="section">
+<h2>Valor Estratégico</h2>
+
+<ul>
+<li>Visión ejecutiva en tiempo real</li>
+<li>Mejor control financiero</li>
+<li>Optimización de decisiones</li>
+<li>Reducción de riesgo operativo</li>
+</ul>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+<p>Proyecto de uso interno – No incluye pasarela de pagos</p>
+<p>Desarrollado por Willian Arce</p>
+</div>
+
+</div>
+
+</body>
+</html>
