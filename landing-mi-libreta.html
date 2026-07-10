@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Libreta — Controlá tu plata sin planillas</title>
+<style>
+  :root {
+    --paper: #EFEAD8; --paper-deep: #E6DFC6; --line: #D3CBAE;
+    --ink: #22293A; --ink-soft: #5C6470;
+    --forest: #2F5233; --forest-soft: #E1EADF;
+    --rust: #9A3B24; --rust-soft: #F2E2D9;
+    --gold: #B9860B; --gold-soft: #F6ECD2;
+    --blue: #3B6E8F; --blue-soft: #E0EAF0;
+    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    --font-body: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); line-height: 1.5; }
+  .mono { font-family: var(--font-mono); }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  header { position: sticky; top: 0; z-index: 40; background: rgba(239,234,216,0.92); backdrop-filter: blur(6px); border-bottom: 1px dashed var(--line); }
+  nav.wrap { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+  .logo { font-family: var(--font-display); font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .logo-mark { width: 26px; height: 26px; border-radius: 6px; background: var(--forest); color: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 14px; flex-shrink:0; }
+  .btn { font-family: var(--font-body); font-weight: 700; font-size: 14px; border: none; border-radius: 9px; padding: 11px 20px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform .12s ease, opacity .12s ease; }
+  .btn:hover { opacity: .9; }
+  .btn:active { transform: scale(.97); }
+  .btn.primary { background: var(--forest); color: #fff; }
+  .btn.dark { background: var(--ink); color: var(--paper); }
+  .btn.small { padding: 8px 14px; font-size: 13px; }
+
+  /* HERO */
+  .hero { padding: 72px 0 60px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--forest); background: var(--forest-soft); display: inline-block; padding: 5px 12px; border-radius: 20px; margin-bottom: 18px; }
+  h1 { font-family: var(--font-display); font-size: 44px; line-height: 1.12; margin: 0 0 18px; letter-spacing: -0.01em; }
+  h1 .accent { color: var(--rust); }
+  .lead { font-size: 17px; color: var(--ink-soft); margin: 0 0 28px; max-width: 480px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .hero-note { font-size: 12.5px; color: var(--ink-soft); }
+
+  /* MOCKUP BROWSER FRAME */
+  .mock { background: #fff; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(34,41,58,0.14); overflow: hidden; transform: rotate(1deg); }
+  .mock-bar { background: var(--paper-deep); padding: 9px 12px; display: flex; gap: 6px; border-bottom: 1px solid var(--line); }
+  .mock-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .mock-body { padding: 18px; background: var(--paper); }
+  .mock-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 12px; }
+  .mock-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 8px 9px; }
+  .mock-card .l { font-size: 8px; color: var(--ink-soft); margin-bottom: 4px; }
+  .mock-card .v { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+  .mock-row { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; margin-bottom: 12px; }
+  .mock-bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  .mock-bars .b { flex: 1; border-radius: 3px 3px 0 0; }
+
+  /* SECTION shared */
+  section { padding: 64px 0; }
+  .section-head { text-align: center; max-width: 560px; margin: 0 auto 40px; }
+  .section-head .eyebrow { display: inline-block; }
+  h2 { font-family: var(--font-display); font-size: 30px; margin: 6px 0 10px; }
+  .section-head p { color: var(--ink-soft); font-size: 15px; margin: 0; }
+
+  /* PAIN POINT / ANT TRAIL */
+  .pain { background: var(--paper-deep); border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+  .pain-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  .antTrail { display: flex; align-items: center; gap: 7px; margin: 18px 0; flex-wrap: wrap; }
+  .antDot { border-radius: 50%; background: var(--gold); opacity: .85; display: inline-block; }
+  .stat-callout { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; }
+  .stat-callout .big { font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--gold); }
+  .stat-callout p { margin: 6px 0 0; font-size: 13px; color: var(--ink-soft); }
+  .fineprint { font-size: 11.5px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* FEATURES */
+  .features { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  .feature-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .feature-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .feature-card h3 { font-family: var(--font-display); font-size: 17px; margin: 0 0 8px; }
+  .feature-card p { font-size: 13.5px; color: var(--ink-soft); margin: 0; line-height: 1.55; }
+
+  /* COMPARISON */
+  .compare { background: var(--paper-deep); border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .compare-card { background: #fff; border-radius: 14px; padding: 24px; border: 1px solid var(--line); }
+  .compare-card.no { opacity: .85; }
+  .compare-card h4 { font-family: var(--font-display); font-size: 16px; margin: 0 0 14px; }
+  .compare-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; }
+  .compare-card li { display: flex; gap: 8px; align-items: flex-start; color: var(--ink-soft); }
+  .compare-card.yes li { color: var(--ink); }
+  .mark { flex-shrink: 0; width: 16px; height: 16px; margin-top: 1px; }
+
+  /* PRIVACY STRIP */
+  .privacy { display: flex; gap: 28px; align-items: center; justify-content: center; flex-wrap: wrap; text-align: center; }
+  .privacy-item { max-width: 220px; }
+  .privacy-item .ic { width: 34px; height: 34px; margin: 0 auto 10px; }
+  .privacy-item h5 { font-size: 13.5px; margin: 0 0 4px; font-weight: 700; }
+  .privacy-item p { font-size: 12.5px; color: var(--ink-soft); margin: 0; }
+
+  /* PRICING / CTA */
+  .cta-section { background: var(--ink); color: var(--paper); border-radius: 22px; margin: 0 24px; padding: 56px 40px; text-align: center; }
+  .cta-section h2 { color: var(--paper); }
+  .cta-section p.lead2 { color: #C7CBD4; max-width: 480px; margin: 0 auto 28px; }
+  .price-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 28px; max-width: 340px; margin: 0 auto; }
+  .price-card .amount { font-family: var(--font-mono); font-size: 34px; font-weight: 700; }
+  .price-card .amount span { font-size: 15px; font-weight: 400; color: #C7CBD4; }
+  .price-card ul { list-style: none; padding: 0; margin: 18px 0 22px; text-align: left; font-size: 13.5px; display: flex; flex-direction: column; gap: 8px; color: #E7E4D9; }
+  .price-card ul li { display: flex; gap: 8px; }
+  .btn.gold { background: var(--gold); color: var(--ink); width: 100%; justify-content: center; }
+
+  footer { padding: 40px 0 30px; text-align: center; }
+  footer .logo { justify-content: center; margin-bottom: 10px; }
+  footer p { font-size: 12px; color: var(--ink-soft); max-width: 480px; margin: 6px auto 0; }
+  footer .social { margin-top: 16px; display: flex; justify-content: center; gap: 14px; }
+  footer .social a { font-size: 13px; font-weight: 700; color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 860px) {
+    .hero-grid, .pain-grid, .compare-grid { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+    .mock { transform: none; }
+    .cta-section { margin: 0 12px; padding: 40px 20px; }
+    .mock-cards { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="logo-mark">ML</span> Mi Libreta</div>
+    <a href="#precio" class="btn dark small">Pedila ahora</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Finanzas personales, sin planillas</span>
+      <h1>Tu plata, <span class="accent">bajo control</span>, en una sola libreta.</h1>
+      <p class="lead">Registrá tus ingresos y egresos, controlá tus gastos hormiga y armá tu ahorro paso a paso. Todo en guaraníes, todo en un solo lugar, sin depender de una hoja de cálculo que nadie actualiza.</p>
+      <div class="hero-ctas">
+        <a href="#precio" class="btn primary">Quiero mi libreta</a>
+        <a href="#funciones" class="btn dark" style="background:transparent;color:var(--ink);border:1px solid var(--line);">Ver qué incluye</a>
+      </div>
+      <div class="hero-note">Pensada para personas comunes, no para contadores.</div>
+    </div>
+    <div class="mock">
+      <div class="mock-bar"><span></span><span></span><span></span></div>
+      <div class="mock-body">
+        <div class="mock-cards">
+          <div class="mock-card"><div class="l">Ingresos</div><div class="v" style="color:var(--forest);">5.000.000</div></div>
+          <div class="mock-card"><div class="l">Egresos</div><div class="v" style="color:var(--rust);">3.180.000</div></div>
+          <div class="mock-card"><div class="l">Saldo</div><div class="v">1.820.000</div></div>
+          <div class="mock-card"><div class="l">Hormiga</div><div class="v" style="color:var(--gold);">210.000</div></div>
+        </div>
+        <div class="mock-bars">
+          <div class="b" style="height:35%;background:var(--forest);"></div>
+          <div class="b" style="height:55%;background:var(--rust);"></div>
+          <div class="b" style="height:70%;background:var(--forest);"></div>
+          <div class="b" style="height:40%;background:var(--rust);"></div>
+          <div class="b" style="height:90%;background:var(--forest);"></div>
+          <div class="b" style="height:60%;background:var(--rust);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pain">
+  <div class="wrap pain-grid">
+    <div>
+      <span class="eyebrow" style="background:var(--gold-soft);color:var(--gold);">El enemigo silencioso</span>
+      <h2>¿Sabés cuánto se te escapa en gastos hormiga?</h2>
+      <p style="color:var(--ink-soft);font-size:15px;">El café, el delivery, esa app que se cobra sola cada mes. Son montos chicos que casi no se sienten, pero se acumulan rápido. Mi Libreta los junta y te muestra el total real.</p>
+      <div class="antTrail">
+        <div class="antDot" style="width:6px;height:6px;"></div>
+        <div class="antDot" style="width:8px;height:8px;"></div>
+        <div class="antDot" style="width:10px;height:10px;"></div>
+        <div class="antDot" style="width:12px;height:12px;"></div>
+        <div class="antDot" style="width:14px;height:14px;"></div>
+        <div class="antDot" style="width:16px;height:16px;"></div>
+        <div class="antDot" style="width:18px;height:18px;"></div>
+        <div class="antDot" style="width:20px;height:20px;"></div>
+      </div>
+    </div>
+    <div class="stat-callout">
+      <div style="font-size:12px;color:var(--ink-soft);margin-bottom:6px;">Ejemplo con un solo hábito</div>
+      <div class="big">2.520.000 Gs.</div>
+      <p>Un café de 7.000 Gs. todos los días, en 12 meses, sin contar nada más.</p>
+      <div class="fineprint">Es un ejemplo ilustrativo para pensar tus propios hábitos, no una promesa de ahorro.</div>
+    </div>
+  </div>
+</section>
+
+<section id="funciones">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Qué incluye</span>
+      <h2>Todo lo que necesitás, nada de lo que no</h2>
+      <p>Cinco pantallas simples, pensadas para que la usés dos minutos por día y ya.</p>
+    </div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--forest-soft);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <h3>Resumen del mes</h3>
+        <p>De un vistazo: cuánto entró, cuánto salió y cuánto te queda. Con gráficos que se entienden sin explicación.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--blue-soft);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M3 17l5-5 4 4 7-7"/><path d="M15 8h5v5"/></svg>
+        </div>
+        <h3>Movimientos</h3>
+        <p>Anotá cada ingreso y egreso por categoría en segundos, como quien anota en un cuaderno de toda la vida.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--gold-soft);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="12" cy="13" r="5"/><path d="M9 3l1.5 3M15 3l-1.5 3M5 12H3M21 12h-2M6 8L4.5 6.5M18 8l1.5-1.5"/></svg>
+        </div>
+        <h3>Gastos hormiga</h3>
+        <p>Marcá los gastos chicos y recurrentes, y mirá cuánto suman de verdad al mes y proyectado al año.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--blue-soft);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M19 5c-1.5-1-3.5-1-5 0-3 0-6 2-7 6-2 0-3 1-3 2 0 1 1 2 3 2 0 2 1 3 2 4h3v-2h2v2h2c1-1 2-3 2-5 1 0 2-1 2-3 0-1-1-3-1-3z"/></svg>
+        </div>
+        <h3>Ahorros</h3>
+        <p>Ponete una meta, registrá tus aportes y mirá la barra de progreso acercarse cada mes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--forest-soft);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 0 0-4-10z"/></svg>
+        </div>
+        <h3>Consejos prácticos</h3>
+        <p>Buenas prácticas de finanzas personales explicadas simple: regla 50/30/20, fondo de emergencia y más.</p>
+      </div>
+      <div class="feature-card" style="display:flex;flex-direction:column;justify-content:center;background:var(--forest);border-color:var(--forest);">
+        <h3 style="color:#fff;">¿Ya te imaginás usándola?</h3>
+        <p style="color:var(--forest-soft);margin-bottom:14px;">Es más simple de lo que parece. Pedila y empezá hoy mismo.</p>
+        <a href="#precio" class="btn" style="background:#fff;color:var(--forest);">Quiero la mía</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">La comparación de siempre</span>
+      <h2>¿Y por qué no sigo con una planilla de Excel?</h2>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card no">
+        <h4>Planilla suelta</h4>
+        <ul>
+          <li><span class="mark">✕</span> Hay que acordarse de abrirla y actualizarla</li>
+          <li><span class="mark">✕</span> Las fórmulas se rompen si tocás algo sin querer</li>
+          <li><span class="mark">✕</span> No te avisa nada, no te muestra tendencias</li>
+          <li><span class="mark">✕</span> Los gastos hormiga se pierden entre filas</li>
+        </ul>
+      </div>
+      <div class="compare-card yes">
+        <h4>Mi Libreta</h4>
+        <ul>
+          <li><span class="mark" style="color:var(--forest);">✓</span> Pantallas listas: solo cargás el dato</li>
+          <li><span class="mark" style="color:var(--forest);">✓</span> Gráficos automáticos de ingresos y egresos</li>
+          <li><span class="mark" style="color:var(--forest);">✓</span> Sección propia para gastos hormiga</li>
+          <li><span class="mark" style="color:var(--forest);">✓</span> Meta de ahorro con progreso visual</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap privacy">
+    <div class="privacy-item">
+      <div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z"/></svg></div>
+      <h5>Tus datos, tuyos</h5>
+      <p>La información de tu plata queda guardada para vos, no se comparte ni se vende a terceros.</p>
+    </div>
+    <div class="privacy-item">
+      <div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16"/></svg></div>
+      <h5>Sin publicidad</h5>
+      <p>No hay banners, no hay terceros pagando para aparecer en tu pantalla mientras revisás tus cuentas.</p>
+    </div>
+    <div class="privacy-item">
+      <div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+      <h5>Dos minutos por día</h5>
+      <p>No necesitás cursos ni experiencia previa. Cargás el dato y seguís con tu día.</p>
+    </div>
+  </div>
+</section>
+
+<section id="precio">
+  <div class="cta-section">
+    <span class="eyebrow" style="background:rgba(185,134,11,0.18);color:var(--gold);">Empezá hoy</span>
+    <h2>Pedí tu Libreta</h2>
+    <p class="lead2">Escribinos por Facebook o WhatsApp y te la dejamos lista para usar. Sin letra chica, sin permanencia.</p>
+    <div class="price-card">
+      <div class="amount">A definir <span>/ pago único</span></div>
+      <ul>
+        <li><span>✓</span> Instalación y configuración inicial incluida</li>
+        <li><span>✓</span> Tus categorías y moneda en guaraníes</li>
+        <li><span>✓</span> Soporte directo por WhatsApp</li>
+      </ul>
+      <a href="https://wa.me/595000000000?text=Hola%2C%20quiero%20pedir%20Mi%20Libreta" class="btn gold">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><span class="logo-mark">ML</span> Mi Libreta</div>
+    <p>Herramienta de organización de finanzas personales. No es un banco, no es una entidad financiera regulada ni brinda asesoría de inversión: es una libreta digital para ordenar tus propios números.</p>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="https://wa.me/595000000000">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
